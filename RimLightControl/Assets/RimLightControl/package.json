@@ -1,0 +1,18 @@
+{
+    "name": "com.kuyuri.rimlightcontrol",
+    "displayName": "RimLightControl",
+    "version": "0.1.0",
+    "unity": "2020.3",
+    "description": "description",
+    "dependencies": {
+      "com.unity.render-pipelines.universal": "11.0.0",
+      "com.unity.universaltoonshader.urp": "2.2.3"
+    },
+    "keywords": [
+    ],
+    "author": {
+      "name": "Kuyuri Iroha",
+      "email": "kuyuri.iroha@gmail.com",
+      "url": "https://kuyuri-iroha.com"
+    }
+  }
