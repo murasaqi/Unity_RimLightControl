@@ -3,7 +3,7 @@
 // https://magicasoft.jp
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Experimental.SceneManagement;
+
 using UnityEngine;
 
 namespace MagicaCloth
@@ -30,15 +30,15 @@ namespace MagicaCloth
         static ShareDataPrefabExtension()
         {
             PrefabUtility.prefabInstanceUpdated += OnPrefabInstanceUpdate;
-            PrefabStage.prefabStageClosing += OnPrefabStageClosing;
-            PrefabStage.prefabSaving += OnPrefabSaving;
+            UnityEditor.SceneManagement.PrefabStage.prefabStageClosing += OnPrefabStageClosing;
+            UnityEditor.SceneManagement.PrefabStage.prefabSaving += OnPrefabSaving;
         }
 
         /// <summary>
         /// プレハブステージが閉じる時
         /// </summary>
         /// <param name="obj"></param>
-        static void OnPrefabStageClosing(PrefabStage pstage)
+        static void OnPrefabStageClosing(UnityEditor.SceneManagement.PrefabStage pstage)
         {
             //#if UNITY_2020_1_OR_NEWER
             //            Debug.Log($"OnPrefabStageClosing() root:[{pstage.prefabContentsRoot.name}] id:{pstage.prefabContentsRoot.GetInstanceID()} path:{pstage.assetPath}");
@@ -107,7 +107,7 @@ namespace MagicaCloth
 
         static void Analyze(GameObject instance, Mode mode)
         {
-            var pstage = PrefabStageUtility.GetCurrentPrefabStage();
+            var pstage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
             bool isVariant = PrefabUtility.IsPartOfVariantPrefab(instance);
             bool onStage = pstage != null ? pstage.IsPartOfPrefabContents(instance) : false;
             //Debug.Log($"Analyze instance:{instance.name} id:{instance.GetInstanceID()} IsVariant:{isVariant} Mode:{mode} PStage:{pstage != null} OnStage:{onStage}");
