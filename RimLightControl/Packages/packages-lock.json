@@ -172,7 +172,7 @@
       }
     },
     "com.unity.universaltoonshader.urp": {
-      "version": "file:E:/workspace/RimLightControlProject/UnityChanToonShaderVer2_Project",
+      "version": "file:../../UnityChanToonShaderVer2_Project",
       "depth": 0,
       "source": "local",
       "dependencies": {
