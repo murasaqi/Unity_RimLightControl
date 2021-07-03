@@ -1289,6 +1289,7 @@ GameObject:
   - component: {fileID: 652747244}
   - component: {fileID: 652747243}
   - component: {fileID: 652747245}
+  - component: {fileID: 652747246}
   m_Layer: 0
   m_Name: BluePoint
   m_TagString: Untagged
@@ -1416,15 +1417,6 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.27933377
-        value: 0.9977979
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
@@ -1440,7 +1432,7 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 1, a: 1}
     isNormalMapToRimLight: 0
     rimLightPower: 0.99
-    rimLightInsideMask: 0.15
+    rimLightInsideMask: 0.2
     rimLightFeatherOff: 1
     lightDirectionMaskOn: 1
     tweakLightDirectionMaskLevel: 0.5
@@ -1449,9 +1441,29 @@ MonoBehaviour:
     rimLightDirectionOffsetYAxis: 0
     rimLightDirectionInverseZAxis: 0
     addAntipodeanRimLight: 0
-    apRimLightColor: {r: 0, g: 0, b: 0, a: 0}
-    apRimLightPower: 0
+    apRimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    apRimLightPower: 1
     apRimLightFeatherOff: 0
+--- !u!114 &652747246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652747241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,6 +2369,7 @@ GameObject:
   - component: {fileID: 1298661094}
   - component: {fileID: 1298661096}
   - component: {fileID: 1298661097}
+  - component: {fileID: 1298661098}
   m_Layer: 0
   m_Name: GreenPoint
   m_TagString: Untagged
@@ -2484,15 +2497,6 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.27933377
-        value: 0.9977979
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
@@ -2508,7 +2512,7 @@ MonoBehaviour:
     color: {r: 0, g: 1, b: 0.3471055, a: 1}
     isNormalMapToRimLight: 0
     rimLightPower: 0.59
-    rimLightInsideMask: 0.15
+    rimLightInsideMask: 0.2
     rimLightFeatherOff: 1
     lightDirectionMaskOn: 1
     tweakLightDirectionMaskLevel: 0.5
@@ -2517,9 +2521,29 @@ MonoBehaviour:
     rimLightDirectionOffsetYAxis: 0
     rimLightDirectionInverseZAxis: 0
     addAntipodeanRimLight: 0
-    apRimLightColor: {r: 0, g: 0, b: 0, a: 0}
-    apRimLightPower: 0
+    apRimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    apRimLightPower: 1
     apRimLightFeatherOff: 0
+--- !u!114 &1298661098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298661093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!4 &1442792196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8657085327214731812, guid: 1f14fef54f9eb604793dfb382276c8e7, type: 3}
@@ -2650,6 +2674,7 @@ GameObject:
   - component: {fileID: 1611852680}
   - component: {fileID: 1611852679}
   - component: {fileID: 1611852681}
+  - component: {fileID: 1611852682}
   m_Layer: 0
   m_Name: YellowPoint
   m_TagString: Untagged
@@ -2777,15 +2802,6 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.27933377
-        value: 0.9977979
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
@@ -2798,10 +2814,10 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     rimLight: 1
-    color: {r: 0.972549, g: 1, b: 0.27058825, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
     isNormalMapToRimLight: 0
-    rimLightPower: 2.55
-    rimLightInsideMask: 0.15
+    rimLightPower: 1
+    rimLightInsideMask: 0.2
     rimLightFeatherOff: 1
     lightDirectionMaskOn: 1
     tweakLightDirectionMaskLevel: 0.5
@@ -2810,9 +2826,29 @@ MonoBehaviour:
     rimLightDirectionOffsetYAxis: 0
     rimLightDirectionInverseZAxis: 0
     addAntipodeanRimLight: 0
-    apRimLightColor: {r: 0, g: 0, b: 0, a: 0}
-    apRimLightPower: 0
+    apRimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    apRimLightPower: 1
     apRimLightFeatherOff: 0
+--- !u!114 &1611852682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611852677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1619681508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,6 +2861,7 @@ GameObject:
   - component: {fileID: 1619681510}
   - component: {fileID: 1619681511}
   - component: {fileID: 1619681512}
+  - component: {fileID: 1619681513}
   m_Layer: 0
   m_Name: RedPoint
   m_TagString: Untagged
@@ -2952,15 +2989,6 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.27933377
-        value: 0.9977979
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
         time: 1
         value: 0
         inSlope: 0
@@ -2976,7 +3004,7 @@ MonoBehaviour:
     color: {r: 1, g: 0, b: 0, a: 1}
     isNormalMapToRimLight: 0
     rimLightPower: 0.05
-    rimLightInsideMask: 0.15
+    rimLightInsideMask: 0.2
     rimLightFeatherOff: 1
     lightDirectionMaskOn: 1
     tweakLightDirectionMaskLevel: 0.5
@@ -2985,9 +3013,29 @@ MonoBehaviour:
     rimLightDirectionOffsetYAxis: 0
     rimLightDirectionInverseZAxis: 0
     addAntipodeanRimLight: 0
-    apRimLightColor: {r: 0, g: 0, b: 0, a: 0}
-    apRimLightPower: 0
+    apRimLightColor: {r: 1, g: 1, b: 1, a: 1}
+    apRimLightPower: 1
     apRimLightFeatherOff: 0
+--- !u!114 &1619681513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619681508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1666936352
 GameObject:
   m_ObjectHideFlags: 0

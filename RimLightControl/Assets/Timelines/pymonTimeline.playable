@@ -65,7 +65,7 @@ MonoBehaviour:
     defaultValue: {fileID: 0}
   template:
     rimLightGroup: {fileID: 0}
-    overwriting: 1
+    overwriting: 0
     overwriteParameter:
       transform: {fileID: 0}
       distanceDecayCurve:
