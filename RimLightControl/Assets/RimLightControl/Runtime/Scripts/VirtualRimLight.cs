@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -28,10 +27,32 @@ public class VirtualRimLight : MonoBehaviour
         public bool apRimLightFeatherOff;
     }
 
+    public static Parameter DefaultParameter => new Parameter
+    {
+        rimLight = true,
+        color = Color.white,
+        isNormalMapToRimLight = false,
+        rimLightPower = 1.0f,
+        distanceDecayCurve = new AnimationCurve(new Keyframe(0, 1), new Keyframe(1, 0)),
+        rimLightInsideMask = 0.2f,
+        rimLightFeatherOff = true,
+        lightDirectionMaskOn = true,
+        tweakLightDirectionMaskLevel = 0.5f,
+        addAntipodeanRimLight = false,
+        apRimLightColor = Color.white,
+        apRimLightPower = 1.0f,
+        apRimLightFeatherOff = false
+    };
+
     [SerializeField] private Light parameterReference;
     [SerializeField] private Parameter parameters;
 
     public Parameter Parameters => parameters;
+
+    private void Awake()
+    {
+        parameters = DefaultParameter;
+    }
 
     private void Update()
     {
