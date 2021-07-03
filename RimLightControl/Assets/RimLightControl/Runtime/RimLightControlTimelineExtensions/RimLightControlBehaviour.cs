@@ -5,9 +5,9 @@ using UnityEngine.Playables;
 [Serializable]
 public class RimLightControlBehaviour : PlayableBehaviour
 {
-    [HideInInspector] public RimLightGroup rimLightGroup;
-    [HideInInspector] public bool overwriting;
-    [HideInInspector] public VirtualRimLight.Parameter overwriteParameter;
+    public RimLightGroup rimLightGroup;
+    public bool overwriting;
+    public VirtualRimLight.Parameter overwriteParameter;
 
     public override void OnPlayableCreate(Playable playable)
     {
