@@ -49,11 +49,6 @@ public class VirtualRimLight : MonoBehaviour
 
     public Parameter Parameters => parameters;
 
-    private void Awake()
-    {
-        parameters = DefaultParameter;
-    }
-
     private void Update()
     {
         if (parameterReference != null)
