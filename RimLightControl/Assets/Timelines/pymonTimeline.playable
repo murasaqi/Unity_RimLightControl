@@ -12,39 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920f25ab6ffedc142baa648209c78607, type: 3}
   m_Name: RimLightControlClip(Clone)(Clone)
   m_EditorClassIdentifier: 
-  rimLightGroup:
-    exposedName: 147fad688dade4f4c920634a61112d28
+  virtualRimLight:
+    exposedName: 
     defaultValue: {fileID: 0}
   overwriteLightTransform:
     exposedName: c3dcfdb04d7e79b4fb66393f64b76652
     defaultValue: {fileID: 0}
-  template:
-    rimLightGroup: {fileID: 0}
-    overwriting: 1
-    overwriteParameter:
-      transform: {fileID: 0}
-      distanceDecayCurve:
-        serializedVersion: 2
+  template: {virtualRimLight: {fileID: 0}, overwriting: 1, overwriteParameter: {transform: {fileID: 0}, distanceDecayCurve:
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      rimLight: 0
-      color: {r: 0, g: 0, b: 0, a: 0}
-      isNormalMapToRimLight: 0
-      rimLightPower: 0
-      rimLightInsideMask: 0
-      rimLightFeatherOff: 0
-      lightDirectionMaskOn: 0
-      tweakLightDirectionMaskLevel: 0
-      rimLightDirectionOverwrite: 0
-      rimLightDirectionOffsetXAxis: 0
-      rimLightDirectionOffsetYAxis: 0
-      rimLightDirectionInverseZAxis: 0
-      addAntipodeanRimLight: 0
-      apRimLightColor: {r: 0, g: 0, b: 0, a: 0}
-      apRimLightPower: 0
-      apRimLightFeatherOff: 0
+, range: 0, rimLight: 0, color:
+        r: 0
+        g: 0
+        b: 0
+        a: 0
+, isNormalMapToRimLight: 0, rimLightPower: 0, rimLightInsideMask: 0, rimLightFeatherOff: 0, lightDirectionMaskOn: 0, tweakLightDirectionMaskLevel: 0, rimLightDirectionOverwrite: 0, rimLightDirectionOffsetXAxis: 0, rimLightDirectionOffsetYAxis: 0, rimLightDirectionInverseZAxis: 0, addAntipodeanRimLight: 0, apRimLightColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 0
+, apRimLightPower: 0, apRimLightFeatherOff: 0}}
 --- !u!114 &-8517564605934830495
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,39 +46,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920f25ab6ffedc142baa648209c78607, type: 3}
   m_Name: RimLightControlClip
   m_EditorClassIdentifier: 
-  rimLightGroup:
-    exposedName: 3b218c0ce23c0af499e0b94dbf026405
+  virtualRimLight:
+    exposedName: 64c851992251e5a4cb69471accb844e8
     defaultValue: {fileID: 0}
   overwriteLightTransform:
     exposedName: 9452d02c9de89e94b96e235bdce8013b
     defaultValue: {fileID: 0}
-  template:
-    rimLightGroup: {fileID: 0}
-    overwriting: 0
-    overwriteParameter:
-      transform: {fileID: 0}
-      distanceDecayCurve:
-        serializedVersion: 2
-        m_Curve: []
+  template: {virtualRimLight: {fileID: 0}, overwriting: 0, overwriteParameter: {transform: {fileID: 0}, distanceDecayCurve:
+        m_Curve:
+        - time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - time: 0.27933377
+          value: 0.9977979
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - time: 1
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      rimLight: 0
-      color: {r: 0, g: 0, b: 0, a: 0}
-      isNormalMapToRimLight: 0
-      rimLightPower: 0
-      rimLightInsideMask: 0
-      rimLightFeatherOff: 0
-      lightDirectionMaskOn: 0
-      tweakLightDirectionMaskLevel: 0
-      rimLightDirectionOverwrite: 0
-      rimLightDirectionOffsetXAxis: 0
-      rimLightDirectionOffsetYAxis: 0
-      rimLightDirectionInverseZAxis: 0
-      addAntipodeanRimLight: 0
-      apRimLightColor: {r: 0, g: 0, b: 0, a: 0}
-      apRimLightPower: 0
-      apRimLightFeatherOff: 0
+, range: 0, rimLight: 1, color:
+        r: 1
+        g: 0.062745094
+        b: 0.22075652
+        a: 1
+, isNormalMapToRimLight: 0, rimLightPower: 0.38, rimLightInsideMask: 0.037, rimLightFeatherOff: 1, lightDirectionMaskOn: 1, tweakLightDirectionMaskLevel: 0.5, rimLightDirectionOverwrite: 0, rimLightDirectionOffsetXAxis: 0, rimLightDirectionOffsetYAxis: 0, rimLightDirectionInverseZAxis: 0, addAntipodeanRimLight: 0, apRimLightColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 0
+, apRimLightPower: 0, apRimLightFeatherOff: 0}}
 --- !u!114 &-3580236816764259447
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -200,200 +202,6 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
---- !u!114 &-73553878244976546
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b772d391a7260a40bafe4d62d866e80, type: 3}
-  m_Name: Rim Light Control Track
-  m_EditorClassIdentifier: 
-  m_Version: 3
-  m_AnimClip: {fileID: 0}
-  m_Locked: 0
-  m_Muted: 0
-  m_CustomPlayableFullTypename: 
-  m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips:
-  - m_Version: 1
-    m_Start: 11.833333333333334
-    m_ClipIn: 0
-    m_Asset: {fileID: -8517564605934830495}
-    m_Duration: 30.816666666666663
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -73553878244976546}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: 9.5
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 1.5166666666666666
-    m_DisplayName: RimLightControlClip
-  - m_Version: 1
-    m_Start: 33.15
-    m_ClipIn: 0
-    m_Asset: {fileID: -8647780924381744138}
-    m_Duration: 39.96666666666666
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -73553878244976546}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: 9.5
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 1.5166666666666666
-    m_DisplayName: RimLightControlClip
-  - m_Version: 1
-    m_Start: 79.9
-    m_ClipIn: 0
-    m_Asset: {fileID: 6118106009768891531}
-    m_Duration: 5
-    m_TimeScale: 1
-    m_ParentTrack: {fileID: -73553878244976546}
-    m_EaseInDuration: 0
-    m_EaseOutDuration: 0
-    m_BlendInDuration: -1
-    m_BlendOutDuration: -1
-    m_MixInCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_MixOutCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_BlendInCurveMode: 0
-    m_BlendOutCurveMode: 0
-    m_ExposedParameterNames: []
-    m_AnimationCurves: {fileID: 0}
-    m_Recordable: 0
-    m_PostExtrapolationMode: 0
-    m_PreExtrapolationMode: 0
-    m_PostExtrapolationTime: 0
-    m_PreExtrapolationTime: 0
-    m_DisplayName: RimLightControlClip
-  m_Markers:
-    m_Objects: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +217,6 @@ MonoBehaviour:
   m_Version: 0
   m_Tracks:
   - {fileID: -3580236816764259447}
-  - {fileID: -73553878244976546}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -428,22 +235,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920f25ab6ffedc142baa648209c78607, type: 3}
   m_Name: RimLightControlClip
   m_EditorClassIdentifier: 
-  rimLightGroup:
-    exposedName: db753808728e81f4cb3f4342afa3cfe3
+  virtualRimLight:
+    exposedName: 
     defaultValue: {fileID: 0}
   overwriteLightTransform:
     exposedName: 8bc3ff4096c1078489cd3a76272a2b45
     defaultValue: {fileID: 0}
-  template:
-    rimLightGroup: {fileID: 0}
-    overwriting: 1
-    overwriteParameter:
-      transform: {fileID: 0}
-      distanceDecayCurve:
-        serializedVersion: 2
+  template: {virtualRimLight: {fileID: 0}, overwriting: 1, overwriteParameter: {transform: {fileID: 0}, distanceDecayCurve:
         m_Curve:
-        - serializedVersion: 3
-          time: 0
+        - time: 0
           value: 1
           inSlope: 0
           outSlope: 0
@@ -451,8 +251,7 @@ MonoBehaviour:
           weightedMode: 0
           inWeight: 0
           outWeight: 0
-        - serializedVersion: 3
-          time: 1
+        - time: 1
           value: 0
           inSlope: 0
           outSlope: 0
@@ -463,22 +262,17 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      rimLight: 1
-      color: {r: 1, g: 0, b: 0.06987047, a: 1}
-      isNormalMapToRimLight: 0
-      rimLightPower: 0.89
-      rimLightInsideMask: 0.157
-      rimLightFeatherOff: 1
-      lightDirectionMaskOn: 1
-      tweakLightDirectionMaskLevel: 0.5
-      rimLightDirectionOverwrite: 0
-      rimLightDirectionOffsetXAxis: 0
-      rimLightDirectionOffsetYAxis: 0
-      rimLightDirectionInverseZAxis: 0
-      addAntipodeanRimLight: 0
-      apRimLightColor: {r: 1, g: 1, b: 1, a: 1}
-      apRimLightPower: 1
-      apRimLightFeatherOff: 0
+, range: 0, rimLight: 1, color:
+        r: 1
+        g: 0
+        b: 0.06987047
+        a: 1
+, isNormalMapToRimLight: 0, rimLightPower: 0.89, rimLightInsideMask: 0.157, rimLightFeatherOff: 1, lightDirectionMaskOn: 1, tweakLightDirectionMaskLevel: 0.5, rimLightDirectionOverwrite: 0, rimLightDirectionOffsetXAxis: 0, rimLightDirectionOffsetYAxis: 0, rimLightDirectionInverseZAxis: 0, addAntipodeanRimLight: 0, apRimLightColor:
+        r: 1
+        g: 1
+        b: 1
+        a: 1
+, apRimLightPower: 1, apRimLightFeatherOff: 0}}
 --- !u!114 &6440086690306991634
 MonoBehaviour:
   m_ObjectHideFlags: 1
