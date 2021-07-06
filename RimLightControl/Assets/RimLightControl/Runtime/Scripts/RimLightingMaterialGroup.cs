@@ -2,11 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
+[ExecuteAlways]
 public class RimLightingMaterialGroup : MonoBehaviour
 {
     [SerializeField] private Transform targetTransform;
     [SerializeField] private List<Material> materials;
+
+    public Transform TargetTransform => targetTransform;
+
+    private readonly List<VirtualRimLight> virtualRimLights = new();
+
     private static readonly int RimLight = Shader.PropertyToID("_RimLight");
     private static readonly int RimLightColor = Shader.PropertyToID("_RimLightColor");
     private static readonly int IsNormalMapToRimLight = Shader.PropertyToID("_Is_NormalMapToRimLight");
@@ -24,11 +31,9 @@ public class RimLightingMaterialGroup : MonoBehaviour
     private static readonly int ApRimLightPower = Shader.PropertyToID("_Ap_RimLight_Power");
     private static readonly int ApRimLightFeatherOff = Shader.PropertyToID("_Ap_RimLight_FeatherOff");
 
-    public Transform TargetTransform => targetTransform;
-
-    public VirtualRimLight.Parameter GetRimLightParametersOfFirst()
+    private VirtualRimLight.RimLightParameter GetRimLightParametersOfFirst()
     {
-        var parameter = new VirtualRimLight.Parameter();
+        var parameter = new VirtualRimLight.RimLightParameter();
         var firstMaterial = materials.FirstOrDefault();
 
         if (firstMaterial == null) return parameter;
@@ -54,26 +59,124 @@ public class RimLightingMaterialGroup : MonoBehaviour
         return parameter;
     }
 
-    public void SetRimLightParameterOfAll(in VirtualRimLight.Parameter parameter)
+    public void AddRimLightParameter(in VirtualRimLight virtualRimLight)
+    {
+        if (!virtualRimLights.Contains(virtualRimLight))
+        {
+            virtualRimLights.Add(virtualRimLight);
+        }
+    }
+
+    public void RemoveRimLightParameter(in VirtualRimLight virtualRimLight)
+    {
+        virtualRimLights.Remove(virtualRimLight);
+    }
+
+    private VirtualRimLight.RimLightParameter BlendParameters()
+    {
+        var blendedParameter = new VirtualRimLight.RimLightParameter();
+
+        var rimLightFeatherOff = 0.0f;
+        var rimLightDirectionInverseZAxis = 0.0f;
+        var apRimLightFeatherOff = 0.0f;
+
+        var rimLinearWeight = 1.0f / virtualRimLights.Count(virtualRimLight =>
+        {
+            Vector3 localLightPosition =
+                targetTransform.worldToLocalMatrix * virtualRimLight.transform.position;
+            return virtualRimLight.Parameter.rimLight &&
+                   localLightPosition.magnitude / virtualRimLight.Parameter.range <= 1.0f;
+        });
+        var apRimLinearWeight =
+            1.0f / virtualRimLights.Count(virtualRimLight =>
+            {
+                Vector3 localLightPosition =
+                    targetTransform.worldToLocalMatrix * virtualRimLight.transform.position;
+                return virtualRimLight.Parameter.addAntipodeanRimLight &&
+                       localLightPosition.magnitude / virtualRimLight.Parameter.range <= 1.0f;
+            });
+
+        foreach (var virtualRimLight in virtualRimLights)
+        {
+            Vector3 localLightPosition =
+                targetTransform.worldToLocalMatrix * virtualRimLight.transform.position;
+
+            var parameter = virtualRimLight.Parameter;
+
+            var decayedPower = Mathf.Clamp(parameter.rimLightPower * parameter.distanceDecayCurve.Evaluate(
+                localLightPosition.magnitude / parameter.range), 0, 5) * rimLinearWeight;
+
+            var decayedApPower = parameter.apRimLightPower * parameter.distanceDecayCurve.Evaluate(
+                localLightPosition.magnitude / parameter.range) * rimLinearWeight;
+
+            blendedParameter.rimLight |= parameter.rimLight;
+            if (parameter.rimLight && localLightPosition.magnitude / virtualRimLight.Parameter.range <= 1.0f)
+            {
+                blendedParameter.color += parameter.color * decayedPower;
+                blendedParameter.isNormalMapToRimLight &= parameter.isNormalMapToRimLight;
+                blendedParameter.rimLightPower += decayedPower;
+                blendedParameter.rimLightInsideMask += parameter.rimLightInsideMask * rimLinearWeight * decayedPower;
+                rimLightFeatherOff += (parameter.rimLightFeatherOff ? 1.0f : 0.0f) * rimLinearWeight;
+                blendedParameter.lightDirectionMaskOn |= parameter.lightDirectionMaskOn;
+                blendedParameter.tweakLightDirectionMaskLevel += parameter.tweakLightDirectionMaskLevel * decayedPower;
+                blendedParameter.rimLightDirectionOverwrite |= parameter.rimLightDirectionOverwrite;
+                blendedParameter.rimLightDirectionOffsetXAxis += localLightPosition.x / parameter.range * decayedPower;
+                blendedParameter.rimLightDirectionOffsetYAxis += localLightPosition.y / parameter.range * decayedPower;
+                rimLightDirectionInverseZAxis +=
+                    (localLightPosition.z < 0 ? 1.0f : -1.0f) * decayedPower;
+            }
+
+            blendedParameter.addAntipodeanRimLight |= parameter.addAntipodeanRimLight;
+            if (parameter.addAntipodeanRimLight &&
+                localLightPosition.magnitude / virtualRimLight.Parameter.range <= 1.0f)
+            {
+                blendedParameter.apRimLightColor += parameter.apRimLightColor * decayedApPower;
+                blendedParameter.apRimLightPower += decayedApPower;
+                apRimLightFeatherOff += (parameter.apRimLightFeatherOff ? 1.0f : 0.0f) * apRimLinearWeight;
+            }
+        }
+
+        blendedParameter.rimLightInsideMask = Mathf.Clamp(blendedParameter.rimLightInsideMask, 0.001f, 1.0f);
+        blendedParameter.tweakLightDirectionMaskLevel =
+            Mathf.Clamp(blendedParameter.tweakLightDirectionMaskLevel, 0.0f, 0.5f);
+        blendedParameter.rimLightDirectionOffsetXAxis =
+            Mathf.Clamp(blendedParameter.rimLightDirectionOffsetXAxis, -1f, 1f);
+        blendedParameter.rimLightDirectionOffsetYAxis =
+            Mathf.Clamp(blendedParameter.rimLightDirectionOffsetYAxis, -1f, 1f);
+
+        const float threshold = 0.5f;
+        blendedParameter.rimLightFeatherOff = threshold < rimLightFeatherOff;
+        blendedParameter.rimLightDirectionInverseZAxis = 0.0f < rimLightDirectionInverseZAxis;
+        blendedParameter.apRimLightFeatherOff = threshold < apRimLightFeatherOff;
+
+        return blendedParameter;
+    }
+
+    private void SetRimLightParameterOfAll(in VirtualRimLight.RimLightParameter blendedParameter)
     {
         foreach (var material in materials)
         {
-            material.SetFloat(RimLight, parameter.rimLight ? 1.0f : 0.0f);
-            material.SetColor(RimLightColor, parameter.color);
-            material.SetFloat(IsNormalMapToRimLight, parameter.isNormalMapToRimLight ? 1.0f : 0.0f);
-            material.SetFloat(RimLightPower, parameter.rimLightPower);
-            material.SetFloat(RimLightInsideMask, parameter.rimLightInsideMask);
-            material.SetFloat(RimLightFeatherOff, parameter.rimLightFeatherOff ? 1.0f : 0.0f);
-            material.SetFloat(LightDirectionMaskOn, parameter.lightDirectionMaskOn ? 1.0f : 0.0f);
-            material.SetFloat(TweakLightDirectionMaskLevel, parameter.tweakLightDirectionMaskLevel);
-            material.SetFloat(IsRimLightBld, parameter.rimLightDirectionOverwrite ? 1.0f : 0.0f);
-            material.SetFloat(OffsetXAxisRimLightBld, parameter.rimLightDirectionOffsetXAxis);
-            material.SetFloat(OffsetYAxisRimLightBld, parameter.rimLightDirectionOffsetYAxis);
-            material.SetFloat(InverseZAxisRimLightBld, parameter.rimLightDirectionInverseZAxis ? 1.0f : 0.0f);
-            material.SetFloat(AddAntipodeanRimLight, parameter.addAntipodeanRimLight ? 1.0f : 0.0f);
-            material.SetColor(ApRimLightColor, parameter.apRimLightColor);
-            material.SetFloat(ApRimLightPower, parameter.apRimLightPower);
-            material.SetFloat(ApRimLightFeatherOff, parameter.apRimLightFeatherOff ? 1.0f : 0.0f);
+            material.SetFloat(RimLight, blendedParameter.rimLight ? 1.0f : 0.0f);
+            material.SetColor(RimLightColor, blendedParameter.color);
+            material.SetFloat(IsNormalMapToRimLight, blendedParameter.isNormalMapToRimLight ? 1.0f : 0.0f);
+            material.SetFloat(RimLightPower, blendedParameter.rimLightPower);
+            material.SetFloat(RimLightInsideMask, blendedParameter.rimLightInsideMask);
+            material.SetFloat(RimLightFeatherOff, blendedParameter.rimLightFeatherOff ? 1.0f : 0.0f);
+            material.SetFloat(LightDirectionMaskOn, blendedParameter.lightDirectionMaskOn ? 1.0f : 0.0f);
+            material.SetFloat(TweakLightDirectionMaskLevel, blendedParameter.tweakLightDirectionMaskLevel);
+            material.SetFloat(IsRimLightBld, blendedParameter.rimLightDirectionOverwrite ? 1.0f : 0.0f);
+            material.SetFloat(OffsetXAxisRimLightBld, blendedParameter.rimLightDirectionOffsetXAxis);
+            material.SetFloat(OffsetYAxisRimLightBld, blendedParameter.rimLightDirectionOffsetYAxis);
+            material.SetFloat(InverseZAxisRimLightBld, blendedParameter.rimLightDirectionInverseZAxis ? 1.0f : 0.0f);
+            material.SetFloat(AddAntipodeanRimLight, blendedParameter.addAntipodeanRimLight ? 1.0f : 0.0f);
+            material.SetColor(ApRimLightColor, blendedParameter.apRimLightColor);
+            material.SetFloat(ApRimLightPower, blendedParameter.apRimLightPower);
+            material.SetFloat(ApRimLightFeatherOff, blendedParameter.apRimLightFeatherOff ? 1.0f : 0.0f);
         }
+    }
+
+    private void LateUpdate()
+    {
+        SetRimLightParameterOfAll(BlendParameters());
     }
 }
