@@ -31,7 +31,7 @@ public class RimLightingMaterialGroup : MonoBehaviour
     private static readonly int ApRimLightPower = Shader.PropertyToID("_Ap_RimLight_Power");
     private static readonly int ApRimLightFeatherOff = Shader.PropertyToID("_Ap_RimLight_FeatherOff");
 
-    public VirtualRimLight.RimLightParameter GetRimLightParametersOfFirst()
+    private VirtualRimLight.RimLightParameter GetRimLightParametersOfFirst()
     {
         var parameter = new VirtualRimLight.RimLightParameter();
         var firstMaterial = materials.FirstOrDefault();
