@@ -1,9 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <ui:VisualElement name="overwritingGroup" style="flex-direction: row; justify-content: space-between; align-items: center; padding-left: 5px; padding-right: 5px;">
-        <ui:Label text="Overwriting" display-tooltip-when-elided="true" name="overwritingLabel" />
-        <ui:Button text="Disable" display-tooltip-when-elided="true" binding-path="overwriting" name="overwriting" style="width: 100px;" />
-    </ui:VisualElement>
-    <ui:VisualElement name="overwriteParameterGroup">
-        <uie:PropertyField binding-path="overwriteParameter" name="overwriteParameter" />
-    </ui:VisualElement>
-</ui:UXML>
