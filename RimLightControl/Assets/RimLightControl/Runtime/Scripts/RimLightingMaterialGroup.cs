@@ -12,7 +12,7 @@ public class RimLightingMaterialGroup : MonoBehaviour
 
     public Transform TargetTransform => targetTransform;
 
-    private readonly List<VirtualRimLight> virtualRimLights = new();
+    private readonly List<VirtualRimLight> virtualRimLights = new List<VirtualRimLight>();
 
     private static readonly int RimLight = Shader.PropertyToID("_RimLight");
     private static readonly int RimLightColor = Shader.PropertyToID("_RimLightColor");
