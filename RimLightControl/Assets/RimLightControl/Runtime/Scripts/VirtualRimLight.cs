@@ -23,6 +23,8 @@ public class VirtualRimLight : MonoBehaviour
         [Range(-1, 1), HideInInspector] public float rimLightDirectionOffsetXAxis;
         [Range(-1, 1), HideInInspector] public float rimLightDirectionOffsetYAxis;
         [HideInInspector] public bool rimLightDirectionInverseZAxis;
+        public Color multiplyColor;
+        [HideInInspector] public float multiplyLevel;
         public bool addAntipodeanRimLight;
         public Color apRimLightColor;
         [Range(0, 5)] public float apRimLightPower;

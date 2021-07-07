@@ -30,6 +30,8 @@ public class RimLightingMaterialGroup : MonoBehaviour
     private static readonly int ApRimLightColor = Shader.PropertyToID("_Ap_RimLightColor");
     private static readonly int ApRimLightPower = Shader.PropertyToID("_Ap_RimLight_Power");
     private static readonly int ApRimLightFeatherOff = Shader.PropertyToID("_Ap_RimLight_FeatherOff");
+    private static readonly int MultiplyColor = Shader.PropertyToID("_MultiplyColor");
+    private static readonly int MultiplyLevel = Shader.PropertyToID("_MultiplyLevel");
 
     private VirtualRimLight.RimLightParameter GetRimLightParametersOfFirst()
     {
@@ -51,6 +53,8 @@ public class RimLightingMaterialGroup : MonoBehaviour
         parameter.rimLightDirectionOffsetXAxis = firstMaterial.GetFloat(OffsetXAxisRimLightBld);
         parameter.rimLightDirectionOffsetYAxis = firstMaterial.GetFloat(OffsetYAxisRimLightBld);
         parameter.rimLightDirectionInverseZAxis = threshold < firstMaterial.GetFloat(InverseZAxisRimLightBld);
+        parameter.multiplyColor = firstMaterial.GetColor(MultiplyColor);
+        parameter.multiplyLevel = firstMaterial.GetFloat(MultiplyLevel);
         parameter.addAntipodeanRimLight = threshold < firstMaterial.GetFloat(AddAntipodeanRimLight);
         parameter.apRimLightColor = firstMaterial.GetColor(ApRimLightColor);
         parameter.apRimLightPower = firstMaterial.GetFloat(ApRimLightPower);
@@ -124,6 +128,8 @@ public class RimLightingMaterialGroup : MonoBehaviour
                 blendedParameter.rimLightDirectionOffsetYAxis += localLightPosition.y / parameter.range * decayedPower;
                 rimLightDirectionInverseZAxis +=
                     (localLightPosition.z < 0 ? 1.0f : -1.0f) * decayedPower;
+                blendedParameter.multiplyColor += parameter.multiplyColor * rimLinearWeight;
+                blendedParameter.multiplyLevel += (localLightPosition.z < 0 ? 1.0f : 0.0f) * decayedPower;
             }
 
             blendedParameter.addAntipodeanRimLight |= parameter.addAntipodeanRimLight;
@@ -168,6 +174,8 @@ public class RimLightingMaterialGroup : MonoBehaviour
             material.SetFloat(OffsetXAxisRimLightBld, blendedParameter.rimLightDirectionOffsetXAxis);
             material.SetFloat(OffsetYAxisRimLightBld, blendedParameter.rimLightDirectionOffsetYAxis);
             material.SetFloat(InverseZAxisRimLightBld, blendedParameter.rimLightDirectionInverseZAxis ? 1.0f : 0.0f);
+            material.SetColor(MultiplyColor, blendedParameter.multiplyColor);
+            material.SetFloat(MultiplyLevel, blendedParameter.multiplyLevel);
             material.SetFloat(AddAntipodeanRimLight, blendedParameter.addAntipodeanRimLight ? 1.0f : 0.0f);
             material.SetColor(ApRimLightColor, blendedParameter.apRimLightColor);
             material.SetFloat(ApRimLightPower, blendedParameter.apRimLightPower);
