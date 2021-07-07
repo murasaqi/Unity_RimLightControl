@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -46,7 +47,7 @@ public class VirtualRimLight : MonoBehaviour
         apRimLightFeatherOff = false
     };
 
-    [SerializeField] private RimLightingMaterialGroup targetMaterialGroup;
+    [SerializeField] private List<RimLightingMaterialGroup> targetMaterialGroups;
     [SerializeField] private Light parameterReference;
     [SerializeField] private RimLightParameter parameter = DefaultRimLightParameter;
 
@@ -54,7 +55,10 @@ public class VirtualRimLight : MonoBehaviour
 
     private void Start()
     {
-        targetMaterialGroup.AddRimLightParameter(this);
+        foreach (var targetMaterialGroup in targetMaterialGroups)
+        {
+            targetMaterialGroup.AddRimLightParameter(this);
+        }
     }
 
     private void Update()
@@ -67,18 +71,35 @@ public class VirtualRimLight : MonoBehaviour
         }
     }
 
+    private void OnValidate()
+    {
+        foreach (var targetMaterialGroup in targetMaterialGroups)
+        {
+            targetMaterialGroup.AddRimLightParameter(this);
+        }
+    }
+
     private void OnEnable()
     {
-        targetMaterialGroup.AddRimLightParameter(this);
+        foreach (var targetMaterialGroup in targetMaterialGroups)
+        {
+            targetMaterialGroup.AddRimLightParameter(this);
+        }
     }
 
     private void OnDestroy()
     {
-        targetMaterialGroup.RemoveRimLightParameter(this);
+        foreach (var targetMaterialGroup in targetMaterialGroups)
+        {
+            targetMaterialGroup.RemoveRimLightParameter(this);
+        }
     }
 
     private void OnDisable()
     {
-        targetMaterialGroup.RemoveRimLightParameter(this);
+        foreach (var targetMaterialGroup in targetMaterialGroups)
+        {
+            targetMaterialGroup.RemoveRimLightParameter(this);
+        }
     }
 }
